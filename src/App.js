@@ -41,7 +41,7 @@ function App() {
               placeholder="Please enter a number"
               ></input>
             {" USD "}= &nbsp;
-            <span>{value===""? 0 : value/coins[selectedCoin].quotes.USD.price} {"BTC"}</span>
+            <span>{value===""? 0 : value/coins[selectedCoin].quotes.USD.price} {coins[selectedCoin].symbol}</span>
           </div>
         </div>
       }
