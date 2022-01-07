@@ -14,35 +14,34 @@ function App() {
         for (let i = 0; i < 10; i++) {
           list.push(json[i]);
         }
-        console.log(json);
         setCoins(list);
         setLoading(false);
       });
   }, []);
   return (
     <div className="App">
-      <h1>The Coins!</h1>
+      <h1>Coin Price</h1>
       {loading?
         <strong>Loading...</strong>
       :
         <div>
-          <select>
+          <select
+            onChange={(event)=>{console.log(event.target.value);setSelectedCoin(event.target.value)}}
+          >
             {coins.map((coin, index) =>
-              <option key={index}>{index}. {coin.name} ({coin.symbol}): ${coin.quotes.USD.price}</option>
+              <option value={index} key={index}>{index}. {coin.name} ({coin.symbol}): ${coin.quotes.USD.price}</option>
             )}
-            {console.log(coins[0])}
-            {console.log(typeof (coins[0]))}
           </select>
           <br/>
           <div>
             <input
-              type="number"
               value={value}
-              placeholder="Please enter a number"
               onChange={(event)=>setValue(event.target.value)}
+              type="number"
+              placeholder="Please enter a number"
               ></input>
             {" USD "}= &nbsp;
-            <span>{value===""? 0 : value*10} {"BTC"}</span>
+            <span>{value===""? 0 : value/coins[selectedCoin].quotes.USD.price} {"BTC"}</span>
           </div>
         </div>
       }
